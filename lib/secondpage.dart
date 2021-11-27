@@ -95,89 +95,224 @@ class _SecondPageState extends State<SecondPage> {
         title: Text(widget.title),
       ),
       backgroundColor: c(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'vie : ' + p.vie.toString(),
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 4,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 5,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            ' je t\'attaque ',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            p.vie.toString() + 'pv',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            l.exp.toString() +
+                                'px /' +
+                                l.expMAx.toString() +
+                                ' px',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '' + l.libelleL,
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Text(
-              vi,
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+          ),
+          Expanded(
+            flex: 6,
+            child: Row(
+              children: <Widget>[],
             ),
-            Text(
-              '' + a.libelle,
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            p.vie.toString() + 'pv',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            l.exp.toString() +
+                                'px /' +
+                                l.expMAx.toString() +
+                                ' px',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '' + l.libelleL,
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 8,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            ' a utilisé' + a.libelle + ' et tu perd ' + vi,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Text(
-              l.libelleL + ' ' + l.exp.toString(),
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    t = 2;
+                    _at();
+                  },
+                  child: const Text("attaque ambigous"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.red),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        niv();
+                        l.nomN();
+                        v();
+                      },
+                      child: const Text("test niv"),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.resolveWith(
+                            (states) => Colors.red),
+                      ),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 1;
+                    _at();
+                  },
+                  child: const Text("attaque infini"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.red),
+                  ),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                t = 2;
-                _at();
-              },
-              child: const Text("attaque ambigous"),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.resolveWith((states) => Colors.red),
-              ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: <Widget>[
+                const Padding(padding: EdgeInsets.only(bottom: 10)),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/route3');
+                  },
+                  child: const Text("Ecran 3"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.red),
+                  ),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                niv();
-                l.nomN();
-                v();
-              },
-              child: const Text("test niv"),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.resolveWith((states) => Colors.red),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                t = 1;
-                _at();
-              },
-              child: const Text("attaque infini"),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.resolveWith((states) => Colors.red),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/route3');
-              },
-              child: const Text("Ecran 3"),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.resolveWith((states) => Colors.red),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

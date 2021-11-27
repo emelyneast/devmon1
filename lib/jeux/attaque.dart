@@ -14,13 +14,13 @@ class Attaque {
   set setLibelle(libelle) => this.libelle = libelle;
 
   int boucleInfini() {
-    libelle = "boucle infini ! ";
+    libelle = " boucle infini ! tu surchauffe et tu plante";
     coup = -40;
     return coup;
   }
 
   int anbigous() {
-    libelle = "Erreur Ambigous ! ";
+    libelle = " Erreur Ambigous ! ta base de donnée n'est plus fonctionnel";
     coup = -20;
     return coup;
   }
