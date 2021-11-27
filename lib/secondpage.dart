@@ -28,19 +28,37 @@ class _SecondPageState extends State<SecondPage> {
   void niv() {
     setState(() {
       l.exp = l.exp + 100;
-      l.nomN();
+      l.ChangeNiv();
     });
+  }
+
+  int v() {
+    if (l.niv == 1) {
+      p.vie = 100;
+    } else if (l.niv == 2) {
+      p.vie = 200;
+    } else if (l.niv == 3) {
+      p.vie = 300;
+    } else if (l.niv == 4) {
+      p.vie = 400;
+    } else if (l.niv == 5) {
+      p.vie = 500;
+    } else if (l.niv == 6) {
+      p.vie = 600;
+    }
+    return p.vie;
   }
 
   Color c() {
     if (p.vie > 0) {
       if (t == 2) {
         fond = Colors.red.shade100;
-      }
-      if (t == 1) {
+      } else if (t == 1) {
         fond = Colors.red.shade200;
+      } else if (t == 0) {
+        fond = Colors.grey.shade100;
       }
-    } else {
+    } else if (p.vie <= 0) {
       fond = Colors.red.shade900;
     }
 
@@ -49,6 +67,7 @@ class _SecondPageState extends State<SecondPage> {
 
   void _at() {
     setState(() {
+      t == 0;
       if (p.vie > 0) {
         if (t == 1) {
           p.vie = p.vie + a.boucleInfini();
@@ -105,7 +124,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             Text(
-              '' + l.exp.toString(),
+              l.libelleL + ' ' + l.exp.toString(),
               style: TextStyle(
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
@@ -126,6 +145,8 @@ class _SecondPageState extends State<SecondPage> {
             ElevatedButton(
               onPressed: () {
                 niv();
+                l.nomN();
+                v();
               },
               child: const Text("test niv"),
               style: ButtonStyle(
