@@ -24,4 +24,18 @@ class Attaque {
     coup = -20;
     return coup;
   }
+
+  int ciberA() {
+    libelle =
+        " Cyber attaque ! tu n'a pas géré la cybersécurité tu te retrouve piraté ";
+    coup = -30;
+    return coup;
+  }
+
+  int arduino() {
+    libelle =
+        " arduino a été lancé 5 fois ! ton ordi surchauffe au point de faire de la fumé ";
+    coup = -70;
+    return coup;
+  }
 }

@@ -78,6 +78,20 @@ class _SecondPageState extends State<SecondPage> {
           }
         } else if (t == 2) {
           p.vie = p.vie + a.anbigous();
+          vi = a.anbigous().toString();
+          if (p.vie <= 0) {
+            p.vie = 0;
+            vi = "tu es mort";
+          }
+        } else if (t == 3) {
+          p.vie = p.vie + a.arduino();
+          vi = a.arduino().toString();
+          if (p.vie <= 0) {
+            p.vie = 0;
+            vi = "tu es mort";
+          }
+        } else if (t == 4) {
+          p.vie = p.vie + a.ciberA();
           vi = "-20pv";
           if (p.vie <= 0) {
             p.vie = 0;
