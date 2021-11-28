@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:devmon/jeux/ennemy.dart';
 import 'package:devmon/jeux/level.dart';
 import 'package:devmon/jeux/perso.dart';
 
@@ -18,15 +19,19 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   Perso p = new Perso();
+  Ennemy e = new Ennemy();
+
   Attaque a = new Attaque();
   Level l = new Level();
   Color fond = Colors.white;
 
   int t = 0;
   String vi = "";
+  String en = "";
 
   void niv() {
     setState(() {
+      e.terminatorV();
       l.exp = l.exp + 100;
       l.ChangeNiv();
     });
@@ -65,41 +70,146 @@ class _SecondPageState extends State<SecondPage> {
     return fond;
   }
 
-  void _at() {
+  void ter() {
     setState(() {
-      t == 0;
-      if (p.vie > 0) {
-        if (t == 1) {
+      e.attaque = true;
+      e.terminator();
+      if (p.vie > 0 || e.vieE > 0) {
+        if (e.at == 1) {
           p.vie = p.vie + a.boucleInfini();
-          vi = "-40pv";
+          en = e.nomE +
+              " a utilisé " +
+              a.libelle +
+              " tu perd " +
+              a.boucleInfini().toString();
           if (p.vie <= 0) {
             p.vie = 0;
-            vi = "tu es mort";
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.boucleInfini().toString() +
+                " tu est mort";
           }
-        } else if (t == 2) {
+        } else if (e.at == 2) {
           p.vie = p.vie + a.anbigous();
-          vi = a.anbigous().toString();
+          en = e.nomE +
+              " a utilisé " +
+              a.libelle +
+              " tu perd " +
+              a.anbigous().toString();
           if (p.vie <= 0) {
             p.vie = 0;
-            vi = "tu es mort";
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.anbigous().toString() +
+                " tu est mort";
           }
-        } else if (t == 3) {
+        } else if (e.at == 3) {
           p.vie = p.vie + a.arduino();
-          vi = a.arduino().toString();
+          en = e.nomE +
+              " a utilisé " +
+              a.libelle +
+              " tu perd " +
+              a.arduino().toString();
           if (p.vie <= 0) {
             p.vie = 0;
-            vi = "tu es mort";
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.arduino().toString() +
+                " tu est mort";
           }
-        } else if (t == 4) {
+        } else if (e.at == 0) {
           p.vie = p.vie + a.ciberA();
-          vi = "-20pv";
+          en = e.nomE +
+              " a utilisé " +
+              a.libelle +
+              " tu perd " +
+              a.ciberA().toString();
+
           if (p.vie <= 0) {
             p.vie = 0;
-            vi = "tu es mort";
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.ciberA().toString() +
+                " tu est mort";
           }
         }
       }
     });
+  }
+
+  String _at() {
+    setState(() {
+      t == 0;
+      if (p.vie > 0 || e.vieE > 0) {
+        if (t == 1) {
+          e.vieE = e.vieE + a.boucleInfini();
+          vi = "tu a utilisé " +
+              a.libelleE +
+              " il perd " +
+              a.boucleInfini().toString();
+          if (e.vieE <= 0) {
+            e.vieE = 0;
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.boucleInfini().toString() +
+                "il est mort";
+          }
+        } else if (t == 2) {
+          e.vieE = e.vieE + a.anbigous();
+          vi = "tu a utilisé " +
+              a.libelleE +
+              " il perd " +
+              a.anbigous().toString();
+          if (e.vieE <= 0) {
+            e.vieE = 0;
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.anbigous().toString() +
+                "il est mort";
+          }
+        } else if (t == 3) {
+          e.vieE = e.vieE + a.arduino();
+          vi = "tu a utilisé " +
+              a.libelleE +
+              " il perd " +
+              a.arduino().toString();
+          if (e.vieE <= 0) {
+            e.vieE = 0;
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.arduino().toString() +
+                "il est mort";
+          }
+        } else if (t == 4) {
+          e.vieE = e.vieE + a.ciberA();
+          vi = "tu a utilisé " +
+              a.libelleE +
+              " il perd " +
+              a.ciberA().toString();
+          vi = "-20pv";
+          if (e.vieE <= 0) {
+            e.vieE = 0;
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.ciberA().toString() +
+                "il est mort";
+          }
+        }
+      }
+    });
+    return vi;
   }
 
   @override
@@ -124,7 +234,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            ' je t\'attaque ',
+                            vi,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -141,7 +251,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            p.vie.toString() + 'pv',
+                            e.affiche(),
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -151,15 +261,8 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            l.exp.toString() +
-                                'px /' +
-                                l.expMAx.toString() +
-                                ' px',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                            e.vieE.toString() + 'pv',
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
                       ),
@@ -168,7 +271,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            '' + l.libelleL,
+                            '' + e.ter(),
                             style: TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
@@ -205,6 +308,14 @@ class _SecondPageState extends State<SecondPage> {
                             p.vie.toString() + 'pv',
                             style: Theme.of(context).textTheme.headline6,
                           ),
+                        ),
+                      ),
+                      Text(
+                        ' la' + e.at.toString(),
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
                       Expanded(
@@ -250,7 +361,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            ' a utilisé' + a.libelle + ' et tu perd ' + vi,
+                            en,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -283,7 +394,7 @@ class _SecondPageState extends State<SecondPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         niv();
-                        l.nomN();
+                        l.nomN(l.niv);
                         v();
                       },
                       child: const Text("test niv"),
@@ -313,6 +424,16 @@ class _SecondPageState extends State<SecondPage> {
             child: Row(
               children: <Widget>[
                 const Padding(padding: EdgeInsets.only(bottom: 10)),
+                ElevatedButton(
+                  onPressed: () {
+                    ter();
+                  },
+                  child: const Text("attaque infini"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.red),
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/route3');

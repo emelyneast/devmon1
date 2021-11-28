@@ -25,10 +25,10 @@ class Level {
       niv = niv + 1;
       exp = 0;
     }
-    nomN();
+    nomN(niv);
   }
 
-  int nomN() {
+  int nomN(niv) {
     if (niv == 1) {
       libelleL = "BTS1";
 

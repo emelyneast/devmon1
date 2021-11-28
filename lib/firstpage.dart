@@ -12,6 +12,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  TextEditingController textFieldController = TextEditingController();
   Perso p = new Perso();
   String n = "";
 
@@ -39,7 +40,7 @@ class _FirstPageState extends State<FirstPage> {
 
               onSubmitted: (value) {
                 setState(() {
-                  p.nom = value;
+                  this.p.nom = value;
                 });
               },
 
@@ -48,7 +49,7 @@ class _FirstPageState extends State<FirstPage> {
             ),
             const Padding(padding: EdgeInsets.only(top: 50)),
             Text(
-              'Bienvenu :' + p.affiche(),
+              'Bienvenu :' + this.p.nom,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(p.affiche()),

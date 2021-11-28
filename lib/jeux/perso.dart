@@ -2,7 +2,7 @@ import 'package:devmon/jeux/level.dart';
 
 class Perso {
   int _niveau = 1;
-  String nom = "u";
+  String nom = "";
   Level l = new Level();
 
   String get getNom => this.nom;
@@ -21,7 +21,7 @@ class Perso {
   String affiche() {
     return nom;
   }
-
+/*
   int v() {
     if (l.niv == 1) {
       vie = 100;
@@ -37,5 +37,5 @@ class Perso {
       vie = 600;
     }
     return vie;
-  }
+  }*/
 }
