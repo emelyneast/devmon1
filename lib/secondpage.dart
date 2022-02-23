@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:devmon/jeux/ennemy.dart';
 import 'package:devmon/jeux/level.dart';
 import 'package:devmon/jeux/perso.dart';
+import 'dart:math';
 
 import 'package:devmon/jeux/attaque.dart';
 
@@ -23,11 +24,14 @@ class _SecondPageState extends State<SecondPage> {
   Attaque a = new Attaque();
   Level l = new Level();
   Color fond = Colors.white;
+  int nbNom = 0;
+  Random random = new Random();
 
   int t = 0;
   String vi = "";
   String en = "";
   bool tour = true;
+  String nomEnnemy = "";
 
   void mort() {
     if (p.vie <= 0) {
@@ -59,11 +63,18 @@ class _SecondPageState extends State<SecondPage> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Ta gagner'),
-          content: const Text('Quitter'),
+          content: const Text('Continuer'),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, '/route3'),
-              child: const Text('Quitter'),
+              onPressed: () {
+                l.exp = l.exp + 100;
+                l.ChangeNiv();
+                init();
+                v();
+                c();
+                Navigator.pop(context, 'Continuer');
+              },
+              child: const Text('Continuer'),
             ),
           ],
         ),
@@ -73,24 +84,31 @@ class _SecondPageState extends State<SecondPage> {
 
   void niv() {
     setState(() {
-      e.terminatorV();
-      l.exp = l.exp + 100;
-      l.ChangeNiv();
+      if (l.niv == 1) {
+        e.bts1V();
+      } else if (l.niv == 2) {
+        e.bts2V();
+      } else if (l.niv == 3) {
+        e.licenceV();
+      } else if (l.niv == 4) {
+        e.master1V();
+      } else if (l.niv == 5) {
+        e.master2V();
+      } else if (l.niv == 6) {
+        e.terminatorV();
+      } else if (l.niv == 20) {
+        e.illuV();
+      }
     });
   }
 
-//ennemy dire si niveau bts1 a bts2 ennemy = sel, spoiler anime,streammeur
-//si niv licence ennemy = le chien,veille techno, streammeur
-//si  niv master ennemy = patron
-// si niv terminator ennemy = sql, vax, terminator
-//dieu = jeux fini quand gagne contre illuminati
   void c() {
     fond = Colors.white;
   }
 
   void init() {
     setState(() {
-      e.terminatorV();
+      niv();
       en = "";
       vi = "";
       l.exp = l.exp;
@@ -310,6 +328,33 @@ class _SecondPageState extends State<SecondPage> {
     return vi;
   }
 
+  String ennemy() {
+    if (l.niv >= 1 && l.niv <= 2) {
+      nbNom = random.nextInt(4) + 1;
+      if (nbNom == 1) {
+        nomEnnemy = e.afRag();
+      } else if (nbNom == 2) {
+        nomEnnemy = e.afChien();
+      } else if (nbNom == 3) {
+        nomEnnemy = e.afStreammeur();
+      } else if (nbNom == 4) {
+        nomEnnemy = e.afSpolier();
+      }
+    } else if (l.niv >= 6 && l.niv <= 10) {
+      nbNom = random.nextInt(3) + 1;
+      if (nbNom == 1) {
+        nomEnnemy = e.affiche();
+      } else if (nbNom == 2) {
+        nomEnnemy = e.afAntiVaccin();
+      } else {
+        nomEnnemy = e.afMmesql();
+      }
+    } else if (l.niv > 10) {
+      nomEnnemy = e.afIlluminati();
+    }
+    return nomEnnemy;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -349,7 +394,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            e.affiche(),
+                            ennemy(),
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -369,7 +414,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            '' + e.ter(),
+                            '' + l.libelleL,
                             style: TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
@@ -470,6 +515,7 @@ class _SecondPageState extends State<SecondPage> {
                   onPressed: () {
                     t = 2;
                     _at();
+                    ter();
                     mort();
                   },
                   child: const Text("attaque ambigous"),
@@ -482,6 +528,7 @@ class _SecondPageState extends State<SecondPage> {
                   onPressed: () {
                     t = 1;
                     _at();
+                    ter();
                     mort();
                   },
                   child: const Text("attaque infini"),
@@ -498,17 +545,6 @@ class _SecondPageState extends State<SecondPage> {
             child: Row(
               children: <Widget>[
                 const Padding(padding: EdgeInsets.only(bottom: 10)),
-                ElevatedButton(
-                  onPressed: () {
-                    ter();
-                    mort();
-                  },
-                  child: const Text("attaque ennemi"),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => Colors.red),
-                  ),
-                ),
                 ElevatedButton(
                   onPressed: () {
                     niv();

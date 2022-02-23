@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:devmon/jeux/attaque.dart';
 import 'package:devmon/jeux/level.dart';
 import 'package:devmon/jeux/perso.dart';
@@ -12,6 +14,7 @@ class Ennemy {
   Level l = new Level();
   int vieE = 100;
   String nomNE = "";
+  String nomEnnemy = "";
   int idE = 0;
   int nbR = 3;
 
@@ -39,6 +42,12 @@ class Ennemy {
 
   set setVieE(vieE) => this.vieE = vieE;
 
+//ennemy dire si niveau bts1 a bts2 ennemy = sel, spoiler anime,streammeur
+//si niv licence ennemy = le chien,veille techno, streammeur
+//si  niv master ennemy = patron
+// si niv terminator ennemy = sql, vax, terminator
+//dieu = jeux fini quand gagne contre illuminati
+
   String affiche() {
     nomE = "terminator";
     return nomE;
@@ -59,6 +68,36 @@ class Ennemy {
     return nomE;
   }
 
+  String afChien() {
+    nomE = "Le chien";
+    return nomE;
+  }
+
+  String afSpolier() {
+    nomE = "spoiler";
+    return nomE;
+  }
+
+  String afStreammeur() {
+    nomE = "Streammeur";
+    return nomE;
+  }
+
+  String afVeille() {
+    nomE = "Veille Tachno";
+    return nomE;
+  }
+
+  String afPatron() {
+    nomE = "patron";
+    return nomE;
+  }
+
+  String afIlluminati() {
+    nomE = "Illuminati";
+    return nomE;
+  }
+
   void en() {
     idE = random.nextInt(nbR);
     if (idE == 0) {
@@ -76,6 +115,48 @@ class Ennemy {
 
   int terminatorV() {
     l.niv = 6;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int bts1V() {
+    l.niv = 1;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int bts2V() {
+    l.niv = 2;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int licenceV() {
+    l.niv = 3;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int master1V() {
+    l.niv = 4;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int master2V() {
+    l.niv = 5;
+    l.nomN;
+    v();
+    return v();
+  }
+
+  int illuV() {
+    l.niv = 20;
     l.nomN;
     v();
     return v();

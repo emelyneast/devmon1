@@ -48,6 +48,9 @@ class Level {
     } else if (niv == 6) {
       libelleL = "terminator";
       expMAx = 1000;
+    } else if (niv > 10) {
+      libelleL = "Dieu";
+      expMAx = 10000;
     }
     return exp;
   }
