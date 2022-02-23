@@ -6,7 +6,6 @@ import 'package:devmon/jeux/perso.dart';
 import 'package:devmon/jeux/attaque.dart';
 
 import 'package:flutter/material.dart';
-import 'package:time/time.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key, required this.title}) : super(key: key);
@@ -28,11 +27,73 @@ class _SecondPageState extends State<SecondPage> {
   int t = 0;
   String vi = "";
   String en = "";
+  bool tour = true;
+
+  void mort() {
+    if (p.vie <= 0) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Tes mort'),
+          content: const Text('Quitter ou recommencer'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, '/route3'),
+              child: const Text('Quitter'),
+            ),
+            TextButton(
+              onPressed: () {
+                e.at == 4;
+                init();
+                v();
+                c();
+                Navigator.pop(context, 'Recommencer');
+              },
+              child: const Text('Recommencer'),
+            ),
+          ],
+        ),
+      );
+    } else if (e.vieE <= 0) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Ta gagner'),
+          content: const Text('Quitter'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, '/route3'),
+              child: const Text('Quitter'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   void niv() {
     setState(() {
       e.terminatorV();
       l.exp = l.exp + 100;
+      l.ChangeNiv();
+    });
+  }
+
+//ennemy dire si niveau bts1 a bts2 ennemy = sel, spoiler anime,streammeur
+//si niv licence ennemy = le chien,veille techno, streammeur
+//si  niv master ennemy = patron
+// si niv terminator ennemy = sql, vax, terminator
+//dieu = jeux fini quand gagne contre illuminati
+  void c() {
+    fond = Colors.white;
+  }
+
+  void init() {
+    setState(() {
+      e.terminatorV();
+      en = "";
+      vi = "";
+      l.exp = l.exp;
       l.ChangeNiv();
     });
   }
@@ -54,159 +115,196 @@ class _SecondPageState extends State<SecondPage> {
     return p.vie;
   }
 
-  Color c() {
-    if (p.vie > 0) {
-      if (t == 2) {
-        fond = Colors.red.shade100;
-      } else if (t == 1) {
-        fond = Colors.red.shade200;
-      } else if (t == 0) {
-        fond = Colors.grey.shade100;
-      }
-    } else if (p.vie <= 0) {
-      fond = Colors.red.shade900;
-    }
-
-    return fond;
-  }
-
   void ter() {
     setState(() {
       e.attaque = true;
       e.terminator();
-      if (p.vie > 0 || e.vieE > 0) {
-        if (e.at == 1) {
-          p.vie = p.vie + a.boucleInfini();
-          en = e.nomE +
-              " a utilisé " +
-              a.libelle +
-              " tu perd " +
-              a.boucleInfini().toString();
-          if (p.vie <= 0) {
-            p.vie = 0;
+      if (tour == false) {
+        if (p.vie > 0 || e.vieE > 0) {
+          if (e.at == 1) {
+            p.vie = p.vie + a.boucleInfini();
             en = e.nomE +
                 " a utilisé " +
                 a.libelle +
                 " tu perd " +
                 a.boucleInfini().toString() +
-                " tu est mort";
-          }
-        } else if (e.at == 2) {
-          p.vie = p.vie + a.anbigous();
-          en = e.nomE +
-              " a utilisé " +
-              a.libelle +
-              " tu perd " +
-              a.anbigous().toString();
-          if (p.vie <= 0) {
-            p.vie = 0;
+                "pv";
+            fond = Colors.red.shade400;
+            if (p.vie <= 0) {
+              p.vie = 0;
+              en = e.nomE +
+                  " a utilisé " +
+                  a.libelle +
+                  " tu perd " +
+                  a.boucleInfini().toString() +
+                  " tu est mort";
+              fond = Colors.red.shade900;
+            }
+            tour = true;
+          } else if (e.at == 2) {
+            p.vie = p.vie + a.anbigous();
             en = e.nomE +
                 " a utilisé " +
                 a.libelle +
                 " tu perd " +
                 a.anbigous().toString() +
-                " tu est mort";
-          }
-        } else if (e.at == 3) {
-          p.vie = p.vie + a.arduino();
-          en = e.nomE +
-              " a utilisé " +
-              a.libelle +
-              " tu perd " +
-              a.arduino().toString();
-          if (p.vie <= 0) {
-            p.vie = 0;
+                "pv";
+            fond = Colors.red.shade200;
+            if (p.vie <= 0) {
+              p.vie = 0;
+              en = e.nomE +
+                  " a utilisé " +
+                  a.libelle +
+                  " tu perd " +
+                  a.anbigous().toString() +
+                  "pv" +
+                  " tu est mort";
+              fond = Colors.red.shade900;
+            }
+            tour = true;
+          } else if (e.at == 3) {
+            p.vie = p.vie + a.arduino();
             en = e.nomE +
                 " a utilisé " +
                 a.libelle +
                 " tu perd " +
                 a.arduino().toString() +
-                " tu est mort";
-          }
-        } else if (e.at == 0) {
-          p.vie = p.vie + a.ciberA();
-          en = e.nomE +
-              " a utilisé " +
-              a.libelle +
-              " tu perd " +
-              a.ciberA().toString();
-
-          if (p.vie <= 0) {
-            p.vie = 0;
+                "pv";
+            fond = Colors.red.shade700;
+            if (p.vie <= 0) {
+              p.vie = 0;
+              en = e.nomE +
+                  " a utilisé " +
+                  a.libelle +
+                  " tu perd " +
+                  a.arduino().toString() +
+                  "pv" +
+                  " tu est mort";
+              fond = Colors.red.shade900;
+            }
+            tour = true;
+          } else if (e.at == 0) {
+            p.vie = p.vie + a.ciberA();
             en = e.nomE +
                 " a utilisé " +
                 a.libelle +
                 " tu perd " +
                 a.ciberA().toString() +
-                " tu est mort";
+                "pv";
+            fond = Colors.red.shade300;
+            if (p.vie <= 0) {
+              p.vie = 0;
+              en = e.nomE +
+                  " a utilisé " +
+                  a.libelle +
+                  " tu perd " +
+                  a.ciberA().toString() +
+                  "pv" +
+                  " tu est mort";
+              fond = Colors.red.shade900;
+            }
+            tour = true;
           }
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("a toi !"),
+        ));
       }
     });
   }
 
   String _at() {
     setState(() {
-      t == 0;
-      if (p.vie > 0 || e.vieE > 0) {
-        if (t == 1) {
-          e.vieE = e.vieE + a.boucleInfini();
-          vi = "tu a utilisé " +
-              a.libelleE +
-              " il perd " +
-              a.boucleInfini().toString();
-          if (e.vieE <= 0) {
-            e.vieE = 0;
+      if (tour == true) {
+        t == 0;
+        if (p.vie > 0 || e.vieE > 0) {
+          if (t == 1) {
+            e.vieE = e.vieE + a.boucleInfini();
             vi = "tu a utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.boucleInfini().toString() +
-                "il est mort";
-          }
-        } else if (t == 2) {
-          e.vieE = e.vieE + a.anbigous();
-          vi = "tu a utilisé " +
-              a.libelleE +
-              " il perd " +
-              a.anbigous().toString();
-          if (e.vieE <= 0) {
-            e.vieE = 0;
+                "pv";
+            fond = Colors.blue.shade100;
+            if (e.vieE <= 0) {
+              e.vieE = 0;
+              vi = "tu a utilisé " +
+                  a.libelleE +
+                  " il perd " +
+                  a.boucleInfini().toString() +
+                  "pv " +
+                  "il est mort";
+              fond = Colors.green.shade200;
+            }
+
+            tour = false;
+          } else if (t == 2) {
+            e.vieE = e.vieE + a.anbigous();
             vi = "tu a utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.anbigous().toString() +
-                "il est mort";
-          }
-        } else if (t == 3) {
-          e.vieE = e.vieE + a.arduino();
-          vi = "tu a utilisé " +
-              a.libelleE +
-              " il perd " +
-              a.arduino().toString();
-          if (e.vieE <= 0) {
-            e.vieE = 0;
+                "pv";
+            fond = Colors.blue.shade100;
+            if (e.vieE <= 0) {
+              e.vieE = 0;
+              vi = "tu a utilisé " +
+                  a.libelleE +
+                  " il perd " +
+                  a.anbigous().toString() +
+                  "pv " +
+                  "il est mort";
+              fond = Colors.green.shade200;
+            }
+
+            tour = false;
+          } else if (t == 3) {
+            e.vieE = e.vieE + a.arduino();
             vi = "tu a utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.arduino().toString() +
-                "il est mort";
-          }
-        } else if (t == 4) {
-          e.vieE = e.vieE + a.ciberA();
-          vi = "tu a utilisé " +
-              a.libelleE +
-              " il perd " +
-              a.ciberA().toString();
-          vi = "-20pv";
-          if (e.vieE <= 0) {
-            e.vieE = 0;
+                "pv ";
+            fond = Colors.blue.shade100;
+            if (e.vieE <= 0) {
+              e.vieE = 0;
+              vi = "tu a utilisé " +
+                  a.libelleE +
+                  " il perd " +
+                  a.arduino().toString() +
+                  "pv " +
+                  "il est mort";
+              fond = Colors.green.shade200;
+            }
+
+            tour = false;
+          } else if (t == 4) {
+            e.vieE = e.vieE + a.ciberA();
             vi = "tu a utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.ciberA().toString() +
-                "il est mort";
+                "pv";
+            fond = Colors.blue.shade100;
+            if (e.vieE <= 0) {
+              e.vieE = 0;
+              vi = "tu a utilisé " +
+                  a.libelleE +
+                  " il perd " +
+                  a.ciberA().toString() +
+                  "pv " +
+                  "il est mort";
+              fond = Colors.green.shade200;
+            }
+
+            tour = false;
           }
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("a l'ennemi !"),
+        ));
       }
     });
     return vi;
@@ -218,7 +316,7 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      backgroundColor: c(),
+      backgroundColor: fond,
       body: Column(
         children: <Widget>[
           Expanded(
@@ -310,14 +408,6 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                         ),
                       ),
-                      Text(
-                        ' la' + e.at.toString(),
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
                       Expanded(
                         flex: 3,
                         child: Container(
@@ -380,6 +470,7 @@ class _SecondPageState extends State<SecondPage> {
                   onPressed: () {
                     t = 2;
                     _at();
+                    mort();
                   },
                   child: const Text("attaque ambigous"),
                   style: ButtonStyle(
@@ -387,28 +478,11 @@ class _SecondPageState extends State<SecondPage> {
                         (states) => Colors.red),
                   ),
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        niv();
-                        l.nomN(l.niv);
-                        v();
-                      },
-                      child: const Text("test niv"),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => Colors.red),
-                      ),
-                    ),
-                  ),
-                ),
                 ElevatedButton(
                   onPressed: () {
                     t = 1;
                     _at();
+                    mort();
                   },
                   child: const Text("attaque infini"),
                   style: ButtonStyle(
@@ -427,8 +501,9 @@ class _SecondPageState extends State<SecondPage> {
                 ElevatedButton(
                   onPressed: () {
                     ter();
+                    mort();
                   },
-                  child: const Text("attaque infini"),
+                  child: const Text("attaque ennemi"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => Colors.red),
@@ -436,9 +511,11 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/route3');
+                    niv();
+                    l.nomN(l.niv);
+                    v();
                   },
-                  child: const Text("Ecran 3"),
+                  child: const Text("test niv"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => Colors.red),

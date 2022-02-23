@@ -46,4 +46,29 @@ class Attaque {
     coup = -70;
     return coup;
   }
+
+  int pointVirgule() {
+    libelle =
+        " il ta enlevé un ; ! ton programme est bugué et tu vois pas l'erreur le sel est en toi";
+    libelleE =
+        " tu lui enleve un ; ! son programme est bugué et il ne vois pas l'erreur le sel est en lui";
+    coup = -10;
+    return coup;
+  }
+
+  int spoiler() {
+    libelle =
+        " il te spoil ton anime pref ! ty t'enerve et tu est déconcentrer tu es en position pls";
+    libelleE =
+        " tu le spoil son anime pref ! il s'enerve et il est déconcentrer il es en position pls";
+    coup = -15;
+    return coup;
+  }
+
+  int twitch() {
+    libelle = " il t'oblige a regarder un live toute la soirée t'es fatigué";
+    libelleE = " tu l'oblige a regarder un live toute la soirée il est fatigué";
+    coup = -15;
+    return coup;
+  }
 }

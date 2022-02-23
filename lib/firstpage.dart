@@ -57,7 +57,6 @@ class _FirstPageState extends State<FirstPage> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/route2');
-                  p.nom = n;
                 },
                 child: const Text("Ecran 2"),
                 style: ButtonStyle(

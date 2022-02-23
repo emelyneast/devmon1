@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ThirdPage extends StatefulWidget {
-  const ThirdPage({Key? key, required this.title}) : super(key: key);
+class MapPage extends StatefulWidget {
+  const MapPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<ThirdPage> createState() => _ThirdPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,20 +42,9 @@ class _ThirdPageState extends State<ThirdPage> {
             const Padding(padding: EdgeInsets.only(bottom: 10)),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/route2');
+                Navigator.pushNamed(context, '/route3');
               },
-              child: const Text("Ecran 2"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (states) => Colors.orange),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/route4');
-              },
-              child: const Text("Ecran 4"),
+              child: const Text("Ecran 3"),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith(
                     (states) => Colors.orange),
