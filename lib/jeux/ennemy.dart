@@ -42,12 +42,6 @@ class Ennemy {
 
   set setVieE(vieE) => this.vieE = vieE;
 
-//ennemy dire si niveau bts1 a bts2 ennemy = sel, spoiler anime,streammeur
-//si niv licence ennemy = le chien,veille techno, streammeur
-//si  niv master ennemy = patron
-// si niv terminator ennemy = sql, vax, terminator
-//dieu = jeux fini quand gagne contre illuminati
-
   String affiche() {
     nomE = "terminator";
     return nomE;
@@ -198,9 +192,24 @@ class Ennemy {
     return vieE;
   }
 
+  void test() {
+    while (attaque == true) {
+      if (l.niv >= 1 && l.niv <= 2) {
+        next(0, 3, random);
+      }
+    }
+  }
+
+  int next(int min, int max, Random rand) => min + rand.nextInt(max - min);
+
   int terminator() {
     while (attaque == true) {
-      at = random.nextInt(3);
+      if (l.niv >= 1 && l.niv <= 2) {
+        at = random.nextInt(1);
+      } else if (l.niv == 3) {
+        at = random.nextInt(3) + 1;
+      }
+
       attaque = false;
     }
     return at;
@@ -213,4 +222,93 @@ class Ennemy {
     }
     return at;
   }
+  /*
+  void ter() {
+    setState(() {
+      e.attaque = true;
+      e.terminator();
+      if (tour == false) {
+        if (p.vie > 0 || e.vieE > 0) {
+          if (e.at == 4) {
+            p.vie = p.vie + a.boucleInfini();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.boucleInfini().toString() +
+                "pv";
+            fond = Colors.red.shade400;
+            tour = true;
+          } else if (e.at == 2) {
+            p.vie = p.vie + a.anbigous();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.anbigous().toString() +
+                "pv";
+            fond = Colors.red.shade200;
+            tour = true;
+          } else if (e.at == 3) {
+            p.vie = p.vie + a.twitch();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.twitch().toString() +
+                "pv";
+            fond = Colors.red.shade200;
+            tour = true;
+          } else if (e.at == 1) {
+            p.vie = p.vie + a.arduino();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.arduino().toString() +
+                "pv";
+            fond = Colors.red.shade700;
+            tour = true;
+          } else if (e.at == 0) {
+            p.vie = p.vie + a.ciberA();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.ciberA().toString() +
+                "pv";
+            fond = Colors.red.shade300;
+
+            tour = true;
+          } else if (e.at == 5) {
+            p.vie = p.vie + a.chien();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.chien().toString() +
+                "pv";
+            fond = Colors.red.shade300;
+
+            tour = true;
+          } else if (e.at == 6) {
+            p.vie = p.vie + a.patron();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.patron().toString() +
+                "pv";
+            fond = Colors.red.shade300;
+
+            tour = true;
+          }
+          if (p.vie <= 0) {
+            p.vie = 0;
+            fond = Colors.red.shade900;
+          }
+        }
+      }
+    });
+  }*/
 }

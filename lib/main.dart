@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const FirstPage(title: 'Flutter Navigation'),
+      home: const SecondPage(title: 'Flutter Navigation'),
       routes: <String, WidgetBuilder>{
         '/route1': (BuildContext context) => FirstPage(title: 'Page 1'),
         '/route2': (BuildContext context) => SecondPage(title: 'Page 2'),

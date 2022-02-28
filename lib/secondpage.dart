@@ -109,6 +109,7 @@ class _SecondPageState extends State<SecondPage> {
   void init() {
     setState(() {
       niv();
+      ennemy();
       en = "";
       vi = "";
       l.exp = l.exp;
@@ -133,13 +134,20 @@ class _SecondPageState extends State<SecondPage> {
     return p.vie;
   }
 
+  void attaqueEn() {
+    setState(() {
+      en = "a utilisé " + "tu perd";
+      p.vie = p.vie + 1;
+    });
+  }
+
   void ter() {
     setState(() {
       e.attaque = true;
       e.terminator();
       if (tour == false) {
         if (p.vie > 0 || e.vieE > 0) {
-          if (e.at == 1) {
+          if (e.at == 4) {
             p.vie = p.vie + a.boucleInfini();
             en = e.nomE +
                 " a utilisé " +
@@ -148,16 +156,6 @@ class _SecondPageState extends State<SecondPage> {
                 a.boucleInfini().toString() +
                 "pv";
             fond = Colors.red.shade400;
-            if (p.vie <= 0) {
-              p.vie = 0;
-              en = e.nomE +
-                  " a utilisé " +
-                  a.libelle +
-                  " tu perd " +
-                  a.boucleInfini().toString() +
-                  " tu est mort";
-              fond = Colors.red.shade900;
-            }
             tour = true;
           } else if (e.at == 2) {
             p.vie = p.vie + a.anbigous();
@@ -168,19 +166,18 @@ class _SecondPageState extends State<SecondPage> {
                 a.anbigous().toString() +
                 "pv";
             fond = Colors.red.shade200;
-            if (p.vie <= 0) {
-              p.vie = 0;
-              en = e.nomE +
-                  " a utilisé " +
-                  a.libelle +
-                  " tu perd " +
-                  a.anbigous().toString() +
-                  "pv" +
-                  " tu est mort";
-              fond = Colors.red.shade900;
-            }
             tour = true;
           } else if (e.at == 3) {
+            p.vie = p.vie + a.twitch();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.twitch().toString() +
+                "pv";
+            fond = Colors.red.shade200;
+            tour = true;
+          } else if (e.at == 1) {
             p.vie = p.vie + a.arduino();
             en = e.nomE +
                 " a utilisé " +
@@ -189,17 +186,6 @@ class _SecondPageState extends State<SecondPage> {
                 a.arduino().toString() +
                 "pv";
             fond = Colors.red.shade700;
-            if (p.vie <= 0) {
-              p.vie = 0;
-              en = e.nomE +
-                  " a utilisé " +
-                  a.libelle +
-                  " tu perd " +
-                  a.arduino().toString() +
-                  "pv" +
-                  " tu est mort";
-              fond = Colors.red.shade900;
-            }
             tour = true;
           } else if (e.at == 0) {
             p.vie = p.vie + a.ciberA();
@@ -210,34 +196,62 @@ class _SecondPageState extends State<SecondPage> {
                 a.ciberA().toString() +
                 "pv";
             fond = Colors.red.shade300;
-            if (p.vie <= 0) {
-              p.vie = 0;
-              en = e.nomE +
-                  " a utilisé " +
-                  a.libelle +
-                  " tu perd " +
-                  a.ciberA().toString() +
-                  "pv" +
-                  " tu est mort";
-              fond = Colors.red.shade900;
-            }
+
+            tour = true;
+          } else if (e.at == 5) {
+            p.vie = p.vie + a.chien();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.chien().toString() +
+                "pv";
+            fond = Colors.red.shade300;
+
+            tour = true;
+          } else if (e.at == 6) {
+            p.vie = p.vie + a.patron();
+            en = e.nomE +
+                " a utilisé " +
+                a.libelle +
+                " tu perd " +
+                a.patron().toString() +
+                "pv";
+            fond = Colors.red.shade300;
+
             tour = true;
           }
+          if (p.vie <= 0) {
+            p.vie = 0;
+            fond = Colors.red.shade900;
+          }
         }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("a toi !"),
-        ));
       }
     });
   }
+
+//niv bts attaque: point virgule, ambigous, infini, twich, arduino
+//niv licence: -point virgule, la meme , + spoil, veille techno, chien
+//master: -ambigous, pareil, +patron
+//terminator: -twich, arduino, pareil, +injectoin sql
+//tout le temp: infini, twich
 
   String _at() {
     setState(() {
       if (tour == true) {
         t == 0;
         if (p.vie > 0 || e.vieE > 0) {
-          if (t == 1) {
+          if (t == 4) {
+            e.vieE = e.vieE + a.twitch();
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.twitch().toString() +
+                "pv";
+            fond = Colors.blue.shade100;
+            tour = false;
+          }
+          if (t == 3) {
             e.vieE = e.vieE + a.boucleInfini();
             vi = "tu a utilisé " +
                 a.libelleE +
@@ -245,17 +259,6 @@ class _SecondPageState extends State<SecondPage> {
                 a.boucleInfini().toString() +
                 "pv";
             fond = Colors.blue.shade100;
-            if (e.vieE <= 0) {
-              e.vieE = 0;
-              vi = "tu a utilisé " +
-                  a.libelleE +
-                  " il perd " +
-                  a.boucleInfini().toString() +
-                  "pv " +
-                  "il est mort";
-              fond = Colors.green.shade200;
-            }
-
             tour = false;
           } else if (t == 2) {
             e.vieE = e.vieE + a.anbigous();
@@ -265,19 +268,8 @@ class _SecondPageState extends State<SecondPage> {
                 a.anbigous().toString() +
                 "pv";
             fond = Colors.blue.shade100;
-            if (e.vieE <= 0) {
-              e.vieE = 0;
-              vi = "tu a utilisé " +
-                  a.libelleE +
-                  " il perd " +
-                  a.anbigous().toString() +
-                  "pv " +
-                  "il est mort";
-              fond = Colors.green.shade200;
-            }
-
             tour = false;
-          } else if (t == 3) {
+          } else if (t == 5) {
             e.vieE = e.vieE + a.arduino();
             vi = "tu a utilisé " +
                 a.libelleE +
@@ -285,19 +277,8 @@ class _SecondPageState extends State<SecondPage> {
                 a.arduino().toString() +
                 "pv ";
             fond = Colors.blue.shade100;
-            if (e.vieE <= 0) {
-              e.vieE = 0;
-              vi = "tu a utilisé " +
-                  a.libelleE +
-                  " il perd " +
-                  a.arduino().toString() +
-                  "pv " +
-                  "il est mort";
-              fond = Colors.green.shade200;
-            }
-
             tour = false;
-          } else if (t == 4) {
+          } else if (t == 6) {
             e.vieE = e.vieE + a.ciberA();
             vi = "tu a utilisé " +
                 a.libelleE +
@@ -305,40 +286,89 @@ class _SecondPageState extends State<SecondPage> {
                 a.ciberA().toString() +
                 "pv";
             fond = Colors.blue.shade100;
-            if (e.vieE <= 0) {
-              e.vieE = 0;
-              vi = "tu a utilisé " +
-                  a.libelleE +
-                  " il perd " +
-                  a.ciberA().toString() +
-                  "pv " +
-                  "il est mort";
-              fond = Colors.green.shade200;
-            }
-
+            tour = false;
+          } else if (t == 5) {
+            e.vieE = e.vieE + a.arduino();
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.arduino().toString() +
+                "pv";
+            fond = Colors.blue.shade100;
+            tour = false;
+          } else if (t == 1) {
+            e.vieE = e.vieE + a.pointVirgule();
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.pointVirgule().toString() +
+                "pv";
+            fond = Colors.blue.shade100;
+            tour = false;
+          } else if (t == 7) {
+            e.vieE = e.vieE + a.chien();
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.chien().toString() +
+                "pv";
+            fond = Colors.blue.shade100;
+            tour = false;
+          } else if (t == 8) {
+            e.vieE = e.vieE + a.veille();
+            vi = "tu a utilisé " +
+                a.libelleE +
+                " il perd " +
+                a.veille().toString() +
+                "pv";
+            fond = Colors.blue.shade100;
             tour = false;
           }
+          if (e.vieE <= 0) {
+            e.vieE = 0;
+            fond = Colors.green.shade200;
+          }
         }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("a l'ennemi !"),
-        ));
       }
     });
     return vi;
   }
 
+//ennemy si niveau bts1 a bts2 ennemy = sel, spoiler anime,streammeur
+//si niv licence ennemy = le chien,veille techno, streammeur
+//si  niv master ennemy = patron
+// si niv terminator ennemy = sql, vax, terminator
+//dieu = jeux fini quand gagne contre illuminati
+
   String ennemy() {
     if (l.niv >= 1 && l.niv <= 2) {
-      nbNom = random.nextInt(4) + 1;
+      nbNom = random.nextInt(3) + 1;
       if (nbNom == 1) {
         nomEnnemy = e.afRag();
       } else if (nbNom == 2) {
-        nomEnnemy = e.afChien();
+        nomEnnemy = e.afSpolier();
       } else if (nbNom == 3) {
         nomEnnemy = e.afStreammeur();
-      } else if (nbNom == 4) {
+      }
+    } else if (l.niv == 3) {
+      nbNom = random.nextInt(4) + 1;
+      if (nbNom == 1) {
+        nomEnnemy = e.afChien();
+      } else if (nbNom == 2) {
+        nomEnnemy = e.afVeille();
+      } else if (nbNom == 3) {
         nomEnnemy = e.afSpolier();
+      } else {
+        nomEnnemy = e.afStreammeur();
+      }
+    } else if (l.niv >= 4 && l.niv <= 5) {
+      nbNom = random.nextInt(3) + 1;
+      if (nbNom == 1) {
+        nomEnnemy = e.afChien();
+      } else if (nbNom == 2) {
+        nomEnnemy = e.afVeille();
+      } else {
+        nomEnnemy = e.afPatron();
       }
     } else if (l.niv >= 6 && l.niv <= 10) {
       nbNom = random.nextInt(3) + 1;
@@ -394,7 +424,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            ennemy(),
+                            nomEnnemy,
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
@@ -513,6 +543,19 @@ class _SecondPageState extends State<SecondPage> {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
+                    t = 1;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque infini"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.purple),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
                     t = 2;
                     _at();
                     ter();
@@ -524,37 +567,134 @@ class _SecondPageState extends State<SecondPage> {
                         (states) => Colors.red),
                   ),
                 ),
+                Visibility(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      t = 3;
+                      _at();
+                      ter();
+                      mort();
+                    },
+                    child: const Text("attaque arduino"),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                          (states) => Colors.green),
+                    ),
+                  ),
+                  visible: true,
+                ),
                 ElevatedButton(
                   onPressed: () {
-                    t = 1;
+                    t = 4;
                     _at();
                     ter();
                     mort();
                   },
-                  child: const Text("attaque infini"),
+                  child: const Text("attaque chien"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => Colors.red),
+                        (states) => Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 5;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque débutant"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 6;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque spoil"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Row(
               children: <Widget>[
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
                 ElevatedButton(
                   onPressed: () {
-                    niv();
-                    l.nomN(l.niv);
-                    v();
+                    t = 4;
+                    _at();
+                    ter();
+                    mort();
                   },
-                  child: const Text("test niv"),
+                  child: const Text("STREAM"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => Colors.red),
+                  ),
+                ),
+                Visibility(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      t = 3;
+                      _at();
+                      ter();
+                      mort();
+                    },
+                    child: const Text("attaque arduino"),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                          (states) => Colors.green),
+                    ),
+                  ),
+                  visible: true,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 4;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque chien"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 5;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque débutant"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    t = 6;
+                    _at();
+                    ter();
+                    mort();
+                  },
+                  child: const Text("attaque spoil"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.black),
                   ),
                 ),
               ],

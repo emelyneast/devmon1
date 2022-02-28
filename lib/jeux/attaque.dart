@@ -1,3 +1,4 @@
+import 'package:devmon/jeux/ennemy.dart';
 import 'package:devmon/jeux/perso.dart';
 
 class Attaque {
@@ -5,6 +6,7 @@ class Attaque {
   String libelle = "";
   String libelleE = "";
   Perso p = new Perso();
+  Ennemy e = new Ennemy();
 
   get getCoup => this.coup;
 
@@ -24,7 +26,6 @@ class Attaque {
   int anbigous() {
     libelle = " Erreur Ambigous ! ta base de donnée n'est plus fonctionnel";
     libelleE = " Erreur Ambigous ! ça base de donnée n'est plus fonctionnel";
-
     coup = -20;
     return coup;
   }
@@ -66,9 +67,69 @@ class Attaque {
   }
 
   int twitch() {
-    libelle = " il t'oblige a regarder un live toute la soirée t'es fatigué";
-    libelleE = " tu l'oblige a regarder un live toute la soirée il est fatigué";
+    libelle =
+        "Stream ! il t'oblige a regarder un live toute la soirée t'es fatigué";
+    libelleE =
+        "Stream ! tu l'oblige a regarder un live toute la soirée il est fatigué";
     coup = -15;
     return coup;
+  }
+
+  int patron() {
+    libelle =
+        "Patron ! il te donne masse travail a faire tu es déborder il veut te viré";
+    libelleE =
+        "Patron ! tu appelle l'inspection du travil ils passent, le patron stress tellement qu'il t'oublie";
+    coup = -25;
+    return coup;
+  }
+
+  int chien() {
+    libelle = "Chien ! Il ta fais peter un plomb avec les actus";
+    libelleE = "Chien ! tu le fais chier avec les actus";
+    coup = -30;
+    return coup;
+  }
+
+  int veille() {
+    libelle =
+        "Veille tachno ! il te fais une maj sur tout tes logiciels ta mal gérer ta veille plus rien fonctionne";
+    libelleE =
+        "Veille techno ! tu lui fais une maj sur tout les logiciels il a mal gérer sa veille techno il est perdu";
+    coup = -30;
+    return coup;
+  }
+
+//1boucle infini, 2twitch, 3pointvirgule, 4ciberA, 5arduino, 6anbigous, 7chien, 8veille,  9spoiler, 10patron
+//niv bts attaque: point virgule, ambigous, infini, twich, arduino, ciberA
+//niv licence: -point virgule, la meme , + spoil, veille techno, chien
+//master: -ambigous, pareil, +patron
+//terminator: -twich, arduino, pareil, +injectoin sql
+//tout le temp: infini, twich, ciberA
+
+  void attaqueEn() {
+    e.attaque = true;
+    e.terminator();
+    if (e.at == 1) {
+      boucleInfini();
+    } else if (e.at == 2) {
+      twitch();
+    } else if (e.at == 3) {
+      pointVirgule();
+    } else if (e.at == 4) {
+      ciberA();
+    } else if (e.at == 5) {
+      arduino();
+    } else if (e.at == 6) {
+      anbigous();
+    } else if (e.at == 7) {
+      chien();
+    } else if (e.at == 8) {
+      veille();
+    } else if (e.at == 9) {
+      spoiler();
+    } else if (e.at == 10) {
+      patron();
+    }
   }
 }

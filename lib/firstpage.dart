@@ -45,7 +45,6 @@ class _FirstPageState extends State<FirstPage> {
               },
 
               //controller: _contoller,
-              //obscureText: true, // pour la saisie des mot de pase
             ),
             const Padding(padding: EdgeInsets.only(top: 50)),
             Text(
