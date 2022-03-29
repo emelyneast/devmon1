@@ -243,85 +243,83 @@ class _SecondPageState extends State<SecondPage> {
         if (p.vie > 0 || e.vieE > 0) {
           if (t == 4) {
             e.vieE = e.vieE + a.twitch();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.twitch().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           }
           if (t == 3) {
             e.vieE = e.vieE + a.boucleInfini();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.boucleInfini().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 2) {
             e.vieE = e.vieE + a.anbigous();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.anbigous().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 5) {
             e.vieE = e.vieE + a.arduino();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.arduino().toString() +
                 "pv ";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 6) {
             e.vieE = e.vieE + a.ciberA();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.ciberA().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 5) {
             e.vieE = e.vieE + a.arduino();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.arduino().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 1) {
             e.vieE = e.vieE + a.pointVirgule();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.pointVirgule().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
+
             tour = false;
           } else if (t == 7) {
             e.vieE = e.vieE + a.chien();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.chien().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
             tour = false;
           } else if (t == 8) {
             e.vieE = e.vieE + a.veille();
-            vi = "tu a utilisé " +
+            vi = "tu as utilisé " +
                 a.libelleE +
                 " il perd " +
                 a.veille().toString() +
                 "pv";
-            fond = Colors.blue.shade100;
             tour = false;
           }
           if (e.vieE <= 0) {
@@ -384,6 +382,25 @@ class _SecondPageState extends State<SecondPage> {
     }
     return nomEnnemy;
   }
+
+  /*
+  Faire un truc comme ça
+   Widget attaqueBtn() {
+    Column atBtn = Column(
+      children: [],
+      mainAxisAlignment: MainAxisAlignment.center,
+    );
+
+    for (String attnb in maListe) {
+      Card carte = Card(
+        child: Text(attnb),
+        shadowColor: Colors.black,
+        elevation: 5.0,
+      );
+      atBtn.children.add(carte);
+    }
+    return atBtn;
+  }*/
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:devmon/jeux/attaque.dart';
 import 'package:devmon/jeux/level.dart';
 import 'package:devmon/jeux/perso.dart';

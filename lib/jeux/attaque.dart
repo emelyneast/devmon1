@@ -17,7 +17,7 @@ class Attaque {
   set setLibelle(libelle) => this.libelle = libelle;
 
   int boucleInfini() {
-    libelle = " boucle infini ! tu surchauffe et tu plante";
+    libelle = " boucle infini ! tu surchauffe et tu plantes";
     libelleE = " boucle infini ! il surchauffe et plante";
     coup = -40;
     return coup;
@@ -32,7 +32,7 @@ class Attaque {
 
   int ciberA() {
     libelle =
-        " Cyber attaque ! tu n'a pas géré la cybersécurité tu te retrouve piraté ";
+        " Cyber attaque ! tu n'as pas géré la cybersécurité tu te retrouve piraté ";
     libelleE =
         " Cyber attaque ! il n'a pas géré la cybersécurité il se retrouve piraté ";
     coup = -30;
@@ -50,18 +50,18 @@ class Attaque {
 
   int pointVirgule() {
     libelle =
-        " il ta enlevé un ; ! ton programme est bugué et tu vois pas l'erreur le sel est en toi";
+        "Point virgule, il ta enlevé un ; ! ton programme est bugué et tu vois pas l'erreur le sel est en toi";
     libelleE =
-        " tu lui enleve un ; ! son programme est bugué et il ne vois pas l'erreur le sel est en lui";
+        "Point virgule, tu lui a enlevé un ; ! son programme est bugué et il ne vois pas l'erreur le sel est en lui";
     coup = -10;
     return coup;
   }
 
   int spoiler() {
     libelle =
-        " il te spoil ton anime pref ! ty t'enerve et tu est déconcentrer tu es en position pls";
+        " il te spoil ton anime pref ! ty t'énerve et tu es déconcentré tu es en position pls";
     libelleE =
-        " tu le spoil son anime pref ! il s'enerve et il est déconcentrer il es en position pls";
+        " tu le spoil son anime pref ! il s'énerve et il est déconcentré il est en position pls";
     coup = -15;
     return coup;
   }
@@ -77,9 +77,9 @@ class Attaque {
 
   int patron() {
     libelle =
-        "Patron ! il te donne masse travail a faire tu es déborder il veut te viré";
+        "Patron ! il te donne masse travail a faire tu es débordé il veut te viré";
     libelleE =
-        "Patron ! tu appelle l'inspection du travil ils passent, le patron stress tellement qu'il t'oublie";
+        "Patron ! tu appelle l'inspection du travail, ils passent, le patron stress tellement qu'il t'oublie";
     coup = -25;
     return coup;
   }
@@ -93,9 +93,9 @@ class Attaque {
 
   int veille() {
     libelle =
-        "Veille tachno ! il te fais une maj sur tout tes logiciels ta mal gérer ta veille plus rien fonctionne";
+        "Veille techno ! il te fais une maj sur tout tes logiciels tu as mal géré ta veille plus rien ne fonctionne";
     libelleE =
-        "Veille techno ! tu lui fais une maj sur tout les logiciels il a mal gérer sa veille techno il est perdu";
+        "Veille techno ! tu lui fais une maj sur tout les logiciels il a mal géré sa veille techno il est perdu";
     coup = -30;
     return coup;
   }
